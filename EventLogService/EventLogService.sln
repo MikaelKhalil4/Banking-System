@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0F8FC390-4B24-4538-B629-01A875F0551B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{B1415F2B-E6A2-41B5-9A5F-F94A96F5BDF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0610EE12-88B8-49D2-BB07-1C065437B51E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogService.Application", "EventLogService.Application\EventLogService.Application.csproj", "{50704A31-26EB-403F-90D5-AB9BA8FB292E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogService.Domain", "EventLogService.Domain\EventLogService.Domain.csproj", "{497B35CF-921D-47F9-9C29-96D09A1FFAD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogService.Contacts", "EventLogService.Contacts\EventLogService.Contacts.csproj", "{A90ECBB3-9AA2-4235-9B1F-3E235BCD334D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogService.Persistence", "EventLogService.Persistence\EventLogService.Persistence.csproj", "{D017A700-C953-4886-8FE0-416C25442500}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogService.API", "EventLogService.API\EventLogService.API.csproj", "{585E8FC1-F7D0-4CE7-8C23-EA4F2C8F8801}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{50704A31-26EB-403F-90D5-AB9BA8FB292E} = {0F8FC390-4B24-4538-B629-01A875F0551B}
+		{497B35CF-921D-47F9-9C29-96D09A1FFAD3} = {0F8FC390-4B24-4538-B629-01A875F0551B}
+		{A90ECBB3-9AA2-4235-9B1F-3E235BCD334D} = {B1415F2B-E6A2-41B5-9A5F-F94A96F5BDF7}
+		{D017A700-C953-4886-8FE0-416C25442500} = {B1415F2B-E6A2-41B5-9A5F-F94A96F5BDF7}
+		{585E8FC1-F7D0-4CE7-8C23-EA4F2C8F8801} = {0610EE12-88B8-49D2-BB07-1C065437B51E}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50704A31-26EB-403F-90D5-AB9BA8FB292E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50704A31-26EB-403F-90D5-AB9BA8FB292E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50704A31-26EB-403F-90D5-AB9BA8FB292E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50704A31-26EB-403F-90D5-AB9BA8FB292E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{497B35CF-921D-47F9-9C29-96D09A1FFAD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{497B35CF-921D-47F9-9C29-96D09A1FFAD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{497B35CF-921D-47F9-9C29-96D09A1FFAD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{497B35CF-921D-47F9-9C29-96D09A1FFAD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A90ECBB3-9AA2-4235-9B1F-3E235BCD334D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A90ECBB3-9AA2-4235-9B1F-3E235BCD334D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A90ECBB3-9AA2-4235-9B1F-3E235BCD334D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A90ECBB3-9AA2-4235-9B1F-3E235BCD334D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D017A700-C953-4886-8FE0-416C25442500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D017A700-C953-4886-8FE0-416C25442500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D017A700-C953-4886-8FE0-416C25442500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D017A700-C953-4886-8FE0-416C25442500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{585E8FC1-F7D0-4CE7-8C23-EA4F2C8F8801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{585E8FC1-F7D0-4CE7-8C23-EA4F2C8F8801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{585E8FC1-F7D0-4CE7-8C23-EA4F2C8F8801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{585E8FC1-F7D0-4CE7-8C23-EA4F2C8F8801}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

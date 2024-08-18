@@ -5,6 +5,8 @@ using Foxera.Keycloak;
 using Foxera.Logging;
 using Foxera.Logging.Middlewares;
 using Foxera.Mail;
+using Foxera.RabitMq;
+using Microsoft.Extensions.Options;
 using TransactionService.API;
 using TransactionService.API.StartUp;
 using TransactionService.Persistence;
@@ -32,7 +34,14 @@ services.AddBackgroundJobServices();
 services.AddMailServices(configuration);
 services.AddHealthCheckServices(configuration);
 builder.AddLoggingServices();
+
+
+
 //
+
+
+
+
 var app = builder.Build();
 
 app.ExecuteDbMigrations();

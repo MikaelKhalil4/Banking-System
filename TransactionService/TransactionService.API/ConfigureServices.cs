@@ -1,6 +1,10 @@
 using System.Reflection;
+using Foxera.Common.Settings;
+using Foxera.RabitMq;
 using Microsoft.AspNetCore.OData;
+using Microsoft.Extensions.Options;
 using TransactionService.API.Odata;
+using TransactionService.API.StartUp;
 using TransactionService.Persistence.Context;
 
 namespace TransactionService.API;
@@ -29,5 +33,20 @@ public static class ConfigureServices
         services.AddEndpointsApiExplorer();
         
         services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)));
+        
+        
+        // Configure RabbitMQ settings
+        var rabbitMQSettings = services.GetGenericSettings<RabitMQSettings>(configuration);
+
+         // Register the RabbitMQ service
+        services.AddSingleton<IRabbitMQService, RabbitMQService>(sp =>
+        {
+            return new RabbitMQService(rabbitMQSettings.Host);
+        });
+        
+        
+       services.AddHostedService<RabitMqStartup>();
+       services.AddScoped<RabitMqListners>(); 
+
     }
 }

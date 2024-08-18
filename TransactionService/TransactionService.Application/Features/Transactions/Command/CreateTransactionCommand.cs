@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using Foxera.Common.CustomExceptions;
+using Foxera.RabitMq;
 using Hangfire;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -47,12 +48,13 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
 {
     private readonly ITransactionsDbContext _context;
     private readonly IMapper _mapper;
+    public readonly IRabbitMQService _RabbitMqService;
 
-
-    public CreateTransactionCommandHandler(ITransactionsDbContext context, IMapper mapper)
+    public CreateTransactionCommandHandler(ITransactionsDbContext context, IMapper mapper, IRabbitMQService rabbitMqService)
     {
         _context = context;
         _mapper = mapper;
+        _RabbitMqService = rabbitMqService;
     }
 
     public async Task<TransactionViewModel> Handle(CreateTransactionCommand request,
@@ -91,7 +93,9 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
             }
         }
 
+        _RabbitMqService.Send("account_balance_update_task", account);//it containts el account id , balance
 
+        
         var transactionViewModel = new TransactionViewModel
         {
             AccountId = request.AccountId,
@@ -104,13 +108,12 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
 
         Transaction newTransaction = _mapper.Map<Transaction>(transactionViewModel);
 
-      
 
         if (request.IsRecurrent)
         {
             // Save the initial transaction and get its ID
             _context.Transactions.Add(newTransaction);
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);     
 
             // Generate the job ID
             string jobId = $"RecurrentTransaction/{newTransaction.Id}";

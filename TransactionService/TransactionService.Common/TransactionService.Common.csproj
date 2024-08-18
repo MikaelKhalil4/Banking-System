@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Foxera.RabitMq" Version="1.0.7"/>
         <PackageReference Include="Foxera.Keycloak" Version="1.0.5"/>
         <PackageReference Include="Foxera.Logging" Version="1.0.5" />
         <PackageReference Include="Foxera.BackgroundJobs" Version="1.0.5" />

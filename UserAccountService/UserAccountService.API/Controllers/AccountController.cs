@@ -12,7 +12,7 @@ public class AccountController : ApiControllerBase
 {
     
     [HttpPost("Create()")]
-    [Authorize(Roles = "Employee,Admin")]
+    // [Authorize(Roles = "Employee,Admin")]
     public async Task<IActionResult> CreateAccount([FromBody] CreateAccountCommand command)
     {
         var response = await Mediator.Send(command);

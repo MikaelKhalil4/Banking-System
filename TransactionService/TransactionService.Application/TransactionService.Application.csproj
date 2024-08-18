@@ -9,6 +9,7 @@
    
     <ItemGroup>
       <ProjectReference Include="..\..\UserAccountService\TransactionService.Common\TransactionService.Common.csproj" />
+      <ProjectReference Include="..\TransactionService.Common\TransactionService.Common.csproj" />
       <ProjectReference Include="..\TransactionService.Contracts\TransactionService.Contracts.csproj" />
     </ItemGroup>
 

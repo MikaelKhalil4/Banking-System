@@ -10,6 +10,9 @@ public class CreateAccountCommand : IRequest<CreateAccountResponse>
     public int UserId { get; set; }
     public decimal Balance { get; set; }
 }
+
+#region Response
+
 public class CreateAccountResponse
 {
     public bool Success { get; set; }
@@ -18,6 +21,8 @@ public class CreateAccountResponse
     public Account? NewAccount { get; set; }
 }
 
+
+#endregion
 
 public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, CreateAccountResponse>
 {
@@ -44,12 +49,12 @@ public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand,
             };
         }
         
-        // Create the new account
         var newAccount = new Account
         {
             UserId = request.UserId,
             Balance = request.Balance,
-            CreatedAt = DateTime.UtcNow,
+            CreatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified),
+            BranchId = 1,
             IsDeleted = false
         };
 

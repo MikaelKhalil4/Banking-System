@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace UserAccountService.API.Controllers;
+namespace TransactionService.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

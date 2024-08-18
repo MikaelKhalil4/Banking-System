@@ -2,7 +2,7 @@ using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using TransactionService.Domain.Entities;
 
-namespace TransactionService.API;
+namespace TransactionService.API.Odata;
 
 public class ODataModelBuilder
 {

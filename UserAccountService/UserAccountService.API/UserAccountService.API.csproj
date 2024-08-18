@@ -8,11 +8,13 @@
 
     <ItemGroup>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
-        <PackageReference Include="Foxera.Logging" Version="1.0.3" />
-        <PackageReference Include="Foxera.BackgroundJobs" Version="1.0.3" />
-        <PackageReference Include="Foxera.HealthCheck" Version="1.0.3" />
-        <PackageReference Include="Foxera.Caching" Version="1.0.3" />
-        <PackageReference Include="Foxera.Localization" Version="1.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.2.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\UserAccountService.Application\UserAccountService.Application.csproj" />
+      <ProjectReference Include="..\UserAccountService.Contracts\UserAccountService.Contracts.csproj" />
+      <ProjectReference Include="..\UserAccountService.Persistence\UserAccountService.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

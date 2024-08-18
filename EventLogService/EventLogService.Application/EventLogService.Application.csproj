@@ -5,5 +5,11 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+    
+
+    <ItemGroup>
+      <ProjectReference Include="..\EventLogService.Common\EventLogService.Common.csproj" />
+      <ProjectReference Include="..\EventLogService.Contacts\EventLogService.Contacts.csproj" />
+    </ItemGroup>
 
 </Project>

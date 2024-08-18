@@ -1,6 +1,13 @@
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
 namespace UserAccountService.API.Controllers;
 
-public class ApiControllerBase
+[ApiController]
+[Route("api/[controller]")]
+public abstract class ApiControllerBase : ControllerBase
 {
-    
+    private IMediator _mediatR = null!;
+    protected IMediator Mediator => _mediatR ??= HttpContext.RequestServices.GetRequiredService<IMediator>();
+
 }

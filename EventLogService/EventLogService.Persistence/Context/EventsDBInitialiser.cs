@@ -1,14 +1,15 @@
+using EventLogService.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace UserAccountService.Persistence.Context;
 
-public partial class AccountsDbContextInitialiser
+public partial class EventsDBInitialiser
 {
-    public readonly AccountsDbContext _context;
-    public readonly ILogger<AccountsDbContextInitialiser> _logger;
+    public readonly EventsDbContext _context;
+    public readonly ILogger<EventsDBInitialiser> _logger;
     
-    public AccountsDbContextInitialiser(AccountsDbContext context, ILogger<AccountsDbContextInitialiser> logger)
+    public EventsDBInitialiser(EventsDbContext context, ILogger<EventsDBInitialiser> logger)
     {
         _context = context;
         _logger = logger;

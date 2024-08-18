@@ -6,4 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\UserAccountService.Common\UserAccountService.Common.csproj" />
+      <ProjectReference Include="..\UserAccountService.Contracts\UserAccountService.Contracts.csproj" />
+      <ProjectReference Include="..\UserAccountService.Domain\UserAccountService.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

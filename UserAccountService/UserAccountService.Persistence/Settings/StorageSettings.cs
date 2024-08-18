@@ -1,6 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+using NHibernate.Classic;
+
 namespace UserAccountService.Persistence.Settings;
 
-public class StorageSettings
+public class StorageSettings : IValidatable
 {
-    
+    [Required] public string DefaultConnection { get; set; }
+
+    public void Validate()
+    {
+        Validator.ValidateObject(this, new ValidationContext(this),
+            true); //this logic will check eza el docerator are applied lal properties
+    }
 }

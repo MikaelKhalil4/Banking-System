@@ -1,13 +1,26 @@
-var builder = WebApplication.CreateBuilder(args);
+using Foxera.Common.Settings;
+using TransactionService.API;
+using TransactionService.API.StartUp;
+using TransactionService.Persistence;
+using UserAccountService.Application;
 
+var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
+var configuration = builder.Configuration;
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddControllers();
+services.AddSwaggerGen();
+
+services.AddApplicationServices(configuration);
+services.AddPersistenceServices(configuration);
+services.AddWebApiServices(configuration);
+
+services.AddTransient<IStartupFilter, SettingValidationStartupFilter>();//kermel naamil the validation for all settings
 
 var app = builder.Build();
+
+app.ExecuteDbMigrations();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

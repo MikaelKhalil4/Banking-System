@@ -8,15 +8,13 @@
 
     <ItemGroup>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
-        <PackageReference Include="Foxera.Logging" Version="1.0.3"/>
-        <PackageReference Include="Foxera.BackgroundJobs" Version="1.0.3"/>
-        <PackageReference Include="Foxera.HealthCheck" Version="1.0.3"/>
-        <PackageReference Include="Foxera.Caching" Version="1.0.3"/>
-        <PackageReference Include="Foxera.Localization" Version="1.0.3"/>
+        <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.2.5" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Controllers\"/>
+      <ProjectReference Include="..\TransactionService.Application\TransactionService.Application.csproj" />
+      <ProjectReference Include="..\TransactionService.Contracts\TransactionService.Contracts.csproj" />
+      <ProjectReference Include="..\TransactionService.Persistence\TransactionService.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

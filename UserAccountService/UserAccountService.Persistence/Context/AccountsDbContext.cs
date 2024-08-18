@@ -7,20 +7,38 @@ namespace UserAccountService.Persistence.Context;
 
 public partial class AccountsDbContext : DbContext, IAccountsDbContext
 {
-    private readonly StorageSettings _settings;
-
-    public
-        AccountsDbContext(
-            StorageSettings settings) //injection the settion that was initialized in the configure services
+    // private readonly StorageSettings _settings;
+    //
+    // public
+    //     AccountsDbContext(
+    //         StorageSettings settings) //injection the settion that was initialized in the configure services
+    // {
+    //     _settings = settings;
+    // }
+    //
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    // {
+    //     optionsBuilder.UseNpgsql($"{_settings.DefaultConnection}");
+    // }
+    
+    public AccountsDbContext()
     {
-        _settings = settings;
     }
 
+    public AccountsDbContext(DbContextOptions<AccountsDbContext> options)
+        : base(options)
+    {
+    }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseNpgsql($"{_settings.DefaultConnection}");
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432; Database=AccountsDB;Username=postgres;Password=123");
 
+
+
+    
+    
+    
+    
     public virtual DbSet<Account> Accounts { get; set; }
 
     public virtual DbSet<Branch> Branches { get; set; }
@@ -31,7 +49,8 @@ public partial class AccountsDbContext : DbContext, IAccountsDbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-
+    
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
@@ -143,8 +162,45 @@ public partial class AccountsDbContext : DbContext, IAccountsDbContext
                 .HasConstraintName("users_role_id_fkey");
         });
 
-        OnModelCreatingPartial(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AccountsDbContext).Assembly);
+        SeedData(modelBuilder);
     }
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    public static void SeedData(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Location>().HasData(GetLocationScopeSeeds());
+        modelBuilder.Entity<Branch>().HasData(GetBranchSeeds());
+        modelBuilder.Entity<Role>().HasData(GetRoleSeeds());
+    }
+
+    private static List<Location> GetLocationScopeSeeds()
+    {
+        // Return a list of Location seed data
+        return new List<Location>
+        {
+            new Location {   Id = 1, LocationName = "Location 1" },
+            new Location {  Id = 2,  LocationName = "Location 2" }
+        };
+    }
+
+    private static List<Branch> GetBranchSeeds()
+    {
+        // Return a list of Branch seed data
+        return new List<Branch>
+        {
+            new Branch { Id = 1, Name = "Branch 1", LocationId = 1 },
+            new Branch {Id = 2, Name = "Branch 2", LocationId = 2 }
+        };
+    }
+
+    private static List<Role> GetRoleSeeds()
+    {
+        // Return a list of Role seed data
+        return new List<Role>
+        {
+            new Role {  Id = 1,  RoleName = "Admin" },
+            new Role { Id = 2,  RoleName = "Employee" },
+            new Role { Id = 3,  RoleName = "Customer" }
+        };
+    }
 }

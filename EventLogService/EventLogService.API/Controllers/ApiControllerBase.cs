@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TransactionService.API.Controllers;
+namespace EventLogService.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

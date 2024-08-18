@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Foxera.Logging" Version="1.0.3"/>
+        <PackageReference Include="Foxera.BackgroundJobs" Version="1.0.3"/>
+        <PackageReference Include="Foxera.HealthCheck" Version="1.0.3"/>
+        <PackageReference Include="Foxera.Caching" Version="1.0.3"/>
+        <PackageReference Include="Foxera.Localization" Version="1.0.3"/>
+    </ItemGroup>
+</Project>

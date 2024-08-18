@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
-using TransactionService.Persistence.Context;
+using UserAccountService.Persistence.Context;
 
-namespace TransactionService.API.StartUp;
+namespace UserAccountService.API.StartUp;
 
 public static class ExecuteMigrations
 {
@@ -9,7 +9,7 @@ public static class ExecuteMigrations
     {
         using var scope = app.ApplicationServices.CreateScope();
         var logger = scope.ServiceProvider.GetRequiredService<ILogger<Migrator>>();
-        var initializer = scope.ServiceProvider.GetRequiredService<TransactionsDbContextInitialiser>();
+        var initializer = scope.ServiceProvider.GetRequiredService<AccountsDbContextInitialiser>();
 
         logger.LogInformation("Starting DB migration");
 

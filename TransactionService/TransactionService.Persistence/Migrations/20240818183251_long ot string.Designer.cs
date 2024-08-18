@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TransactionService.Persistence.Context;
@@ -11,9 +12,11 @@ using TransactionService.Persistence.Context;
 namespace TransactionService.Persistence.Migrations
 {
     [DbContext(typeof(TransactionsDbContext))]
-    partial class TransactionsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240818183251_long ot string")]
+    partial class longotstring
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,8 +115,9 @@ namespace TransactionService.Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("bgJob_id");
 
-                    b.Property<long?>("TransactionId")
-                        .HasColumnType("bigint");
+                    b.Property<long>("TransactionId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("transaction_id");
 
                     b.HasKey("Id")
                         .HasName("recurrent_transactions_pkey");
@@ -209,9 +213,14 @@ namespace TransactionService.Persistence.Migrations
 
             modelBuilder.Entity("TransactionService.Domain.Entities.RecurrentTransaction", b =>
                 {
-                    b.HasOne("TransactionService.Domain.Entities.Transaction", null)
+                    b.HasOne("TransactionService.Domain.Entities.Transaction", "Transaction")
                         .WithMany("RecurrentTransactions")
-                        .HasForeignKey("TransactionId");
+                        .HasForeignKey("TransactionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("recurrent_transactions_Transactions_fk");
+
+                    b.Navigation("Transaction");
                 });
 
             modelBuilder.Entity("TransactionService.Domain.Entities.Transaction", b =>

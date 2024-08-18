@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UserAccountService.Application.Helper;
 
 namespace UserAccountService.Application;
 
@@ -9,7 +10,7 @@ public static class ConfigureServices
         IConfiguration configuration)
     {
 
-
+        services.AddScoped<AccountHelper>();
         ////what this configuration do ,the service is it will search in the app layer for the Irequest and Irequesthandler w bet hattun sawa, so kaeano dictionnary sarit, for each Irequest eenda its own request handler
         var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.StartsWith("UserAccountService.Application"))
             .ToArray();

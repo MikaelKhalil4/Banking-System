@@ -4,10 +4,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace UserAccountService.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class DBCreation : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -42,10 +44,10 @@ namespace UserAccountService.Persistence.Migrations
                 name: "branch",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
                     name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    location_id = table.Column<int>(type: "integer", nullable: true)
+                    location_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,23 +56,22 @@ namespace UserAccountService.Persistence.Migrations
                         name: "branches_location_id_fkey",
                         column: x => x.location_id,
                         principalTable: "location",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "user",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     username = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    password = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     role_id = table.Column<int>(type: "integer", nullable: true),
-                    branch_id = table.Column<int>(type: "integer", nullable: true)
+                    branch_id = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("users_pkey", x => x.id);
+                    table.PrimaryKey("PK_user", x => x.id);
                     table.ForeignKey(
                         name: "users_branch_id_fkey",
                         column: x => x.branch_id,
@@ -87,10 +88,10 @@ namespace UserAccountService.Persistence.Migrations
                 name: "account",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
-                    user_id = table.Column<int>(type: "integer", nullable: false),
-                    branch_id = table.Column<int>(type: "integer", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    branch_id = table.Column<long>(type: "bigint", nullable: false),
                     balance = table.Column<decimal>(type: "numeric(15,2)", precision: 15, scale: 2, nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     is_deleted = table.Column<bool>(type: "boolean", nullable: false)
@@ -110,6 +111,34 @@ namespace UserAccountService.Persistence.Migrations
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "location",
+                columns: new[] { "id", "location_name" },
+                values: new object[,]
+                {
+                    { 1, "Location 1" },
+                    { 2, "Location 2" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "role",
+                columns: new[] { "id", "role_name" },
+                values: new object[,]
+                {
+                    { 1, "Admin" },
+                    { 2, "Employee" },
+                    { 3, "Customer" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "branch",
+                columns: new[] { "id", "location_id", "name" },
+                values: new object[,]
+                {
+                    { 1L, 1, "Branch 1" },
+                    { 2L, 2, "Branch 2" }
                 });
 
             migrationBuilder.CreateIndex(

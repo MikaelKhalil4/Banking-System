@@ -5,6 +5,7 @@ namespace UserAccountService.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+
 public abstract class ApiControllerBase : ControllerBase
 {
     private IMediator _mediatR = null!;

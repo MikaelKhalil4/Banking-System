@@ -6,10 +6,12 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Foxera.Logging" Version="1.0.3"/>
-        <PackageReference Include="Foxera.BackgroundJobs" Version="1.0.3"/>
-        <PackageReference Include="Foxera.HealthCheck" Version="1.0.3"/>
-        <PackageReference Include="Foxera.Caching" Version="1.0.3"/>
-        <PackageReference Include="Foxera.Localization" Version="1.0.3"/>
+        <PackageReference Include="Foxera.RabitMq" Version="1.0.7"/>
+        <PackageReference Include="Foxera.Keycloak" Version="1.0.5"/>
+        <PackageReference Include="Foxera.Logging" Version="1.0.5"/>
+        <PackageReference Include="Foxera.BackgroundJobs" Version="1.0.5"/>
+        <PackageReference Include="Foxera.HealthCheck" Version="1.0.5"/>
+        <PackageReference Include="Foxera.Caching" Version="1.0.5"/>
+        <PackageReference Include="Foxera.Localization" Version="1.0.5"/>
     </ItemGroup>
 </Project>

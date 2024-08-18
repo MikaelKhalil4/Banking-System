@@ -5,9 +5,9 @@ namespace TransactionService.Domain.Entities;
 
 public partial class Transaction
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
-    public int AccountId { get; set; }
+    public long AccountId { get; set; }
 
     public decimal Amount { get; set; }
 
@@ -18,6 +18,8 @@ public partial class Transaction
     public int CurrencyId { get; set; }
 
     public bool IsDeleted { get; set; }
+    
+    
 
     public virtual Account Account { get; set; }= null!;
 

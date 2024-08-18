@@ -17,6 +17,10 @@ public static class ExecuteMigrations
 
         logger.LogInformation("DB migration complete");
 
+        
+        
+        
+        
         return app;
     }
 }

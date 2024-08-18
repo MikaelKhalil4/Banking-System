@@ -5,11 +5,11 @@ namespace UserAccountService.Domain.Entities;
 
 public partial class Account
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
 
-    public int BranchId { get; set; }
+    public long BranchId { get; set; }
 
     public decimal Balance { get; set; }
 

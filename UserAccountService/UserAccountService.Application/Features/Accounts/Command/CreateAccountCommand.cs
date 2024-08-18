@@ -1,3 +1,4 @@
+using Foxera.RabitMq;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using UserAccountService.Contracts.Persistence;
@@ -7,7 +8,7 @@ namespace UserAccountService.Application.Features.Accounts.Command;
 
 public class CreateAccountCommand : IRequest<CreateAccountResponse>
 {
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
     public decimal Balance { get; set; }
 }
 
@@ -17,17 +18,16 @@ public class CreateAccountResponse
 {
     public bool Success { get; set; }
     public string Message { get; set; }
-    
     public Account? NewAccount { get; set; }
 }
-
 
 #endregion
 
 public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, CreateAccountResponse>
 {
     private readonly IAccountsDbContext _context;
-
+    public readonly IRabbitMQService _RabbitMqService;
+    
     public CreateAccountCommandHandler(IAccountsDbContext context)
     {
         _context = context;
@@ -58,14 +58,26 @@ public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand,
             IsDeleted = false
         };
 
+        
+        
+        
         _context.Accounts.Add(newAccount);
         await _context.SaveChangesAsync(cancellationToken);
 
+        _RabbitMqService.Send("account_creation_task", newAccount);
+        
+        
+        
+        
         return new CreateAccountResponse
         {
             Success = true,
             Message = "Account created successfully.",
             NewAccount = newAccount
         };
+        
+        
+        
+        
     }
 }

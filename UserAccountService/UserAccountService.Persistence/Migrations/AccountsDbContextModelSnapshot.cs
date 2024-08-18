@@ -24,20 +24,20 @@ namespace UserAccountService.Persistence.Migrations
 
             modelBuilder.Entity("UserAccountService.Domain.Entities.Account", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("bigint")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<long>("Id"));
 
                     b.Property<decimal>("Balance")
                         .HasPrecision(15, 2)
                         .HasColumnType("numeric(15,2)")
                         .HasColumnName("balance");
 
-                    b.Property<int>("BranchId")
-                        .HasColumnType("integer")
+                    b.Property<long>("BranchId")
+                        .HasColumnType("bigint")
                         .HasColumnName("branch_id");
 
                     b.Property<DateTime>("CreatedAt")
@@ -50,8 +50,8 @@ namespace UserAccountService.Persistence.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("is_deleted");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
                     b.HasKey("Id")
@@ -66,12 +66,12 @@ namespace UserAccountService.Persistence.Migrations
 
             modelBuilder.Entity("UserAccountService.Domain.Entities.Branch", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("bigint")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<long>("Id"));
 
                     b.Property<int>("LocationId")
                         .HasColumnType("integer")
@@ -93,13 +93,13 @@ namespace UserAccountService.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 1L,
                             LocationId = 1,
                             Name = "Branch 1"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 2L,
                             LocationId = 2,
                             Name = "Branch 2"
                         });
@@ -184,22 +184,14 @@ namespace UserAccountService.Persistence.Migrations
 
             modelBuilder.Entity("UserAccountService.Domain.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BranchId")
-                        .HasColumnType("integer")
+                    b.Property<long?>("BranchId")
+                        .HasColumnType("bigint")
                         .HasColumnName("branch_id");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("password");
 
                     b.Property<int?>("RoleId")
                         .HasColumnType("integer")
@@ -211,8 +203,7 @@ namespace UserAccountService.Persistence.Migrations
                         .HasColumnType("character varying(50)")
                         .HasColumnName("username");
 
-                    b.HasKey("Id")
-                        .HasName("users_pkey");
+                    b.HasKey("Id");
 
                     b.HasIndex("BranchId");
 
@@ -262,8 +253,6 @@ namespace UserAccountService.Persistence.Migrations
                     b.HasOne("UserAccountService.Domain.Entities.Branch", "Branch")
                         .WithMany("Users")
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("users_branch_id_fkey");
 
                     b.HasOne("UserAccountService.Domain.Entities.Role", "Role")
